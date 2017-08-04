@@ -1,0 +1,83 @@
+body {
+	background-image: url(../images/times.jpeg);
+}
+
+.container {
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 0px;
+	top: 0px;
+}
+
+
+h1 {
+	background-color: #20315a;
+	color: white;
+	border-radius: 8px;
+	top: 0px;
+	margin-top: 0px;
+	padding: 40px;
+	text-align: center;
+	height: 150px;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 56px;
+
+}
+
+#panel-heading {
+	background-color: #20315a;
+	color: white;
+	border-radius: 8px;
+	padding: 20px;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 40px;
+}
+
+.panel-title {
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 34px;
+}
+
+.input-group {
+	padding-bottom: 20px;
+}
+
+.input-group-addon {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #546a8e;
+	color: white;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 18px;
+
+}
+
+input {
+	height: 30px;
+	font-size: 22px;
+	opacity: .9;
+}
+
+.panel {
+	padding-bottom: 15px;
+	margin-top: 30px;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #20315a;
+	border-radius: 12px;
+
+}
+
+.btn {
+	margin-left: 15px;
+	margin-bottom: 15px;
+	background-color: #546a8e;
+	color: white;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 18px;
+}
+
+button:hover {
+	opacity: .8;
+}

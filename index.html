@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/css/stylesheet.css">
+  <style>
+    .panel-primary > .panel-heading {
+      color: #fff;
+      background-color: #2C3E50;
+      border-color: #2C3E50;
+    }
+
+    .panel-primary {
+      border-color: #2C3E50;
+    }
+
+    .panel-heading i {
+      margin-right: 10px;
+    }
+
+    .well h3, .well h5 {
+      color: #2C3E50;
+    }
+
+    .well .label {
+      color: white;
+      background-color: #2C3E50;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <h1><i class="fa fa-newspaper-o" aria-hidden="true"></i>New York Times Search</h1>
+  </div>
+  <div class="row">
+    <div class="panel panel-default">
+      <div id="panel-heading">
+        <h3 class="panel-title">Search Parameters</h3>
+      </div>
+      <div class="panel-body">
+        <div class="input-group">
+          <span class="input-group-addon" >Keywords</span>
+          <input id="searchTerms" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" >Number of Results</span>
+          <input id="numberResults" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" >Start Year</span>
+          <input id="startYear" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" >End Year</span>
+          <input id="endYear" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <button type="button" id="searchBtn" class="btn btn-default">Search</button>
+      <button type="button" id="clearBtn" class="btn btn-default">Clear Results</button>
+
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Top Articles</h3>
+    </div>
+    <div id="content" class="panel-body">
+      <div class="well">
+        <h3><span class="label label-primary">1</span> <strong>The Emptiness of Trump’s Promises of Tolerance</strong>
+        </h3>
+        <h5>By CHARLES HOMANS</h5>
+        <h5>Section: undefined</h5>
+        <h5>2017-07-28T16:31:44+0000</h5>
+        <a href="#">https://www.nytimes.com/2017/07/28/magazine/the-emptiness-of-trumps-promises-of-tolerance.html</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+  var content = '';
+
+  $('#clearBtn').on('click', () => {
+    $('#content').empty();
+  });
+
+  $('#searchBtn').on('click', () => {
+    var obj = {};
+    obj = {
+      'api-key': "7eba6ec7fa744abdaa9fa6fb1287479e",
+      'q': $('#searchTerms').val(),
+      'page': 0
+    };
+    var start = $('#startYear').val();
+    var end = $('#endYear').val();
+    if(start){
+      obj.begin_date = `${start}0101`;
+      if(end){
+        obj.end_date = `${end}1225`
+      }
+    }
+    url += '?' + $.param(obj);
+    $.get(url, (data) => {
+      var arr = data.response.docs;
+      for(var index=0; index < $('#numberResults').val(); index++){
+        console.log(arr[index].headline.main);
+        var title = arr[index].headline.main;
+        var author = arr[index].byline ? arr[index].byline.original : 'N/A';
+        var type = arr[index].type_of_material;
+        var date = arr[index].pub_date;
+        var webUrl = arr[index].web_url;
+        content +=
+          `
+          <div class="well">
+             <h3><span class="label label-primary">${index + 1}</span> <strong>${title}</strong></h3>
+             <h5>${author}</h5>
+             <h5>Section: ${type}</h5>
+             <h5>${date}</h5>
+             <a href="${webUrl}">${webUrl}</a>
+           </div>
+          `;
+      }
+//      arr.forEach((item, index) => {
+//
+//      });
+      $('#content').html(content)
+    });
+  });
+
+</script>
+</body>
+</html>
