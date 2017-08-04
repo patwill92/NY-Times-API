@@ -91,15 +91,17 @@
 </div>
 
 <script>
-  var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-  var content = '';
 
   $('#clearBtn').on('click', () => {
     $('#content').empty();
+//    $('#searchTerms').empty();
+//    $('#startYear').empty();
+//    $('#endYear').empty();
   });
 
   $('#searchBtn').on('click', () => {
-    var obj = {};
+    var content = '';
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     obj = {
       'api-key': "7eba6ec7fa744abdaa9fa6fb1287479e",
       'q': $('#searchTerms').val(),
