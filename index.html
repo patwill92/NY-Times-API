@@ -102,7 +102,7 @@
   $('#searchBtn').on('click', () => {
     var content = '';
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    obj = {
+    var obj = {
       'api-key': "7eba6ec7fa744abdaa9fa6fb1287479e",
       'q': $('#searchTerms').val(),
       'page': 0
